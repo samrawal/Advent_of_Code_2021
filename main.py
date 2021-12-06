@@ -1,6 +1,7 @@
 """
 https://adventofcode.com/2021
 """
+import utils
 from utils import get_data
 
 
@@ -46,9 +47,55 @@ def day2():
 
   return results
 
+'''Today was experimenting with lambdas'''
 def day3():
   pass
+results = {}
+  
+split =            lambda x: [int(i) for i in x]
+most_common_bit =  lambda x: int(sum(x) > len(x)/2)
+binary2int =       lambda l: sum([(2*d)**i for i, d in enumerate(l[::-1])]) - (l[-1] == 0)
+
+data = [split(x) for x in get_data(3)]
+t_data = utils.transpose_list(data)
+s_data = set(get_data(3))
+
+# Part 1
+gamma = [most_common_bit(i) for i in t_data]
+epsilon = [int(not g) for g in gamma]
+results["part1"] = binary2int(gamma) * binary2int(epsilon)
+
+# Part 2
+gamma_s = "".join(str(x) for x in gamma)
+epsilon_s = "".join(str(x) for x in epsilon)
+
+def build_combinations(stem:str, max_len:int):
+  combinations = []
+  if len(stem) == max_len:
+    return [stem]
+  else:
+    for i in ["0", "1"]:
+      combinations.extend(build_combinations(stem + i, max_len))
+  return combinations
+
+
+def get_rating(key:str):
+  for i in range(len(key), 0, -1):
+    substr = key[:i]
+    if substr in s_data:
+      o2_rating = substr
+      return o2_rating
+    else:
+      # TODO fuzzy matching
+      pass
+  return None
+  
+
+
+#return results
+
+
 
 if __name__ == "__main__":
-    CURRENT_DAY = day3()
-    print(CURRENT_DAY)
+  CURRENT_DAY = day3()
+  print(CURRENT_DAY)

@@ -1,1 +1,19 @@
+* Advent of Code 2021
 My Advent of Code 2021 entries, written in Replit!
+
+** Fun little bits of code I enjoyed
+*** lambda to convert binary to integer
+#+BEGIN_SRC python
+binary2int = lambda l: sum([(2*d)**i for i, d in enumerate(l[::-1])]) - (l[-1] == 0)
+#+END_SRC
+*** recursive function to generate combinations
+#+BEGIN_SRC python
+def build_combinations(stem:str, max_len:int):
+  combinations = []
+  if len(stem) == max_len:
+    return [stem]
+  else:
+    for i in ["0", "1"]:
+      combinations.extend(build_combinations(stem + i, max_len))
+  return combinations
+#+END_SRC
