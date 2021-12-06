@@ -1,7 +1,9 @@
 * Advent of Code 2021
 My Advent of Code 2021 entries, written in Replit!
 
-** Fun little bits of code I enjoyed
+** Fun little bits of code I enjoyed writing
+Nice to go back to solving little puzzles under arbitrary constraints :) 
+
 *** lambda to convert binary to integer
 #+BEGIN_SRC python
 binary2int = lambda l: sum([(2*d)**i for i, d in enumerate(l[::-1])]) - (l[-1] == 0)
